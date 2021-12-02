@@ -13,6 +13,8 @@ namespace ToDo_Application
         public string TaskAppointee { get; set; }
         public string CardSize { get; set; }
 
+        public int BoardColumn = (int)BoardColumns.TODO;
+
         public Card(string[] cardDetails)
         {
             CardName = cardDetails[0];

@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>ToDo_Application</RootNamespace>
+    <StartupObject>ToDo_Application.Program</StartupObject>
   </PropertyGroup>
 
 </Project>

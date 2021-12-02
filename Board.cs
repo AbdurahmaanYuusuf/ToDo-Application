@@ -9,7 +9,6 @@ namespace ToDo_Application
     public static class Board
     {
         public static List<Card> ListOfAllCards = new();
-        public static Dictionary<string, string> CardNameLine = new();
 
         public static List<Card> TO_DO_Column = new();
         public static List<Card> IN_PROGRESS_Column = new();

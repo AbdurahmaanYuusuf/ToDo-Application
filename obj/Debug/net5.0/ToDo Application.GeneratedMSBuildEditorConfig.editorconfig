@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = ToDo_Application
-build_property.ProjectDir = C:\Users\stajyer\source\repos\ToDo Application\ToDo Application\
+build_property.ProjectDir = c:\Users\stajyer\source\repos\ToDo Application\ToDo Application\
