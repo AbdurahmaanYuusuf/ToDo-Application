@@ -9,64 +9,82 @@ namespace ToDo_Application
 
         private static string GetCardName()
         {
-            Console.WriteLine("Enter card name: ");
+            Console.WriteLine("\nEnter card name: ");
             string name = Console.ReadLine();
             return name;
         }
 
         private static string GetCardContent()
         {
-            Console.WriteLine("Enter card content: ");
+            Console.WriteLine("\nEnter card content: ");
             string content = Console.ReadLine();
             return content;
         }
 
         private static string GetTaskAppointee(Dictionary<int, string> teamMembers)
         {
-            string teamMembersListString = "(";
+            string teamMembersListString="";
             foreach (var member in teamMembers)
             {
                 teamMembersListString += +member.Key + ":" + member.Value + ", ";
             }
-            teamMembersListString += ")";
 
-            Console.WriteLine("Enter Task Appointee(choose form {0}): ", teamMembersListString.Substring(0, teamMembersListString.Length - 2));
-            string appointee = Console.ReadLine();
-            
+            Console.WriteLine("\nEnter Task Appointee ID No({0}): ", teamMembersListString.Substring(0, teamMembersListString.Length - 2));
+
+            string appointee;
+            while (true)
+            {
+                appointee = Console.ReadLine();
+                bool AppointeeInputIsValid = false;
+
+                foreach(KeyValuePair<int, string> kvp in teamMembers)
+                {
+                    if (kvp.Key.ToString() == appointee)
+                    AppointeeInputIsValid = true;
+                }
+
+                if (AppointeeInputIsValid)
+                {
+                    break;
+                }
+                Console.WriteLine("\nInvalid input for a team member!\n\nPlease Choose a member from the given list:");
+                continue;
+            }
             return appointee;
         }
 
         private static string GetCardSize()
         {
-            Console.WriteLine("Choose size(1-5) -> XS(1),S(2),M(3),L(4),XL(5): ");
-            int size = Convert.ToInt32(Console.ReadLine());
-            string sizeString;
+            Console.WriteLine("\nChoose size(1-5) -> XS(1),S(2),M(3),L(4),XL(5): ");
+
             while (true)
             {
+                string size = Console.ReadLine();
+
                 switch (size)
                 {
-                    case 1:
-                        sizeString = "XS";
-                        return sizeString;
-                    case 2:
-                        sizeString = "S";
-                        return sizeString;
-                    case 3:
-                        sizeString = "M";
-                        return sizeString;
-                    case 4:
-                        sizeString = "L";
-                        return sizeString;
-                    case 5:
-                        sizeString = "XL";
-                        return sizeString;
-                    default:
-                        sizeString = "Invalid size!";
-                        Console.WriteLine("Pleas enter a valid size from 1 to 5");
+                    case "1":
+                        size = "XS";
                         break;
+                    case "2":
+                        size = "S";
+                        break;
+                    case "3":
+                        size = "M";
+                        break;
+                    case "4":
+                        size = "L";
+                        break;
+                    case "5":
+                        size = "XL";
+                        break;
+                    default:
+                        Console.WriteLine("Pleas enter a valid size from 1 to 5: ");
+                        continue;
                 }
-                continue;
+                return size;
             }
+            
         }
         
 
@@ -159,24 +177,23 @@ namespace ToDo_Application
             TeamMembers.Add(5, "Ali");
 
             //creating by default three cards and adding them to the board
-            Card DefaultCard1 = new Card(new string[] { "Laundry", "Do laundry by tomorrow", "1", "5" });
+            Card DefaultCard1 = new Card(new string[] { "Laundry", "Do laundry by tomorrow", "1", "XL" });
             Board.ListOfAllCards.Add(DefaultCard1);
             Board.TO_DO_Column.Add(DefaultCard1);
 
-            Card DefaultCard2 = new Card(new string[] { "Garbage", "Take out the garbage", "2", "3" });
+            Card DefaultCard2 = new Card(new string[] { "Garbage", "Take out the garbage", "2", "M" });
             Board.ListOfAllCards.Add(DefaultCard2);
-            Board.TO_DO_Column.Add(DefaultCard1);
+            Board.TO_DO_Column.Add(DefaultCard2);
 
-            Card DefaultCard3 = new Card(new string[] { "Garden", "Mow the lawn", "4", "1" });
+            Card DefaultCard3 = new Card(new string[] { "Garden", "Mow the lawn", "4", "S" });
             Board.ListOfAllCards.Add(DefaultCard3);
-            Board.TO_DO_Column.Add(DefaultCard1);
+            Board.TO_DO_Column.Add(DefaultCard3);
             #endregion
 
             
-
             while (true)
             {
-                Console.WriteLine("Please Choose the operation you want to perform:");
+                Console.WriteLine("\n\nPlease Choose the operation you want to perform:");
                 Console.WriteLine("*******************************************");
                 Console.WriteLine("(1) Show the Board");
                 Console.WriteLine("(2) Add card to the Board");
