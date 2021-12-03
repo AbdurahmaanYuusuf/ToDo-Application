@@ -17,7 +17,7 @@ namespace ToDo_Application
 
         public Card(string[] cardDetails)
         {
-            CardName = cardDetails[0];
+            this.CardName = cardDetails[0];
             CardContent = cardDetails[1];
             TaskAppointee= cardDetails[2];
             CardSize = cardDetails[3];

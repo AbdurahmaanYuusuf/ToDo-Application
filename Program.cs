@@ -6,57 +6,69 @@ namespace ToDo_Application
     class Program
     {
         #region Helper_Functions
-        private static string[] GetCardDetailsFromUser(Dictionary<int,string> teamMembers)
+
+        private static string GetCardName()
         {
             Console.WriteLine("Enter card name: ");
-            string name= Console.ReadLine();
-            
+            string name = Console.ReadLine();
+            return name;
+        }
+
+        private static string GetCardContent()
+        {
             Console.WriteLine("Enter card content: ");
             string content = Console.ReadLine();
+            return content;
+        }
 
-            Console.WriteLine("Choose size(1-5) -> XS(1),S(2),M(3),L(4),XL(5): ");
-            int size = Convert.ToInt32(Console.ReadLine());
-            string sizeString;
-            switch (size)
-            {
-                case 1:
-                    sizeString = "XS";
-                    break;
-                case 2:
-                    sizeString = "XS";
-                    break;
-                case 3:
-                    sizeString = "XS";
-                    break;
-                case 4:
-                    sizeString = "XS";
-                    break;
-                case 5:
-                    sizeString = "XL";
-                    break;
-                default:
-                    sizeString = "Invalid sıze!";
-                    Console.WriteLine("Pleas enter a valid size from 1 to 5");
-                    break;
-            }
-
+        private static string GetTaskAppointee(Dictionary<int, string> teamMembers)
+        {
             string teamMembersListString = "(";
             foreach (var member in teamMembers)
             {
-                teamMembersListString +=  + member.Key + ":" + member.Value + ", ";
+                teamMembersListString += +member.Key + ":" + member.Value + ", ";
             }
             teamMembersListString += ")";
 
+            Console.WriteLine("Enter Task Appointee(choose form {0}): ", teamMembersListString.Substring(0, teamMembersListString.Length - 2));
+            string appointee = Console.ReadLine();
             
-            Console.WriteLine("Enter Task Appointee(choose form {0}): ", teamMembersListString.Substring(0, teamMembersListString.Length-2));
-            int appointee= Convert.ToInt32(Console.ReadLine());
-            if (teamMembers.ContainsKey(appointee))
-            {
-                    Console.WriteLine("Pleas enter a valid size from 1 to 5");
-            }
-
-            return new string[] { name, content, sizeString, appointee.ToString() };
+            return appointee;
         }
+
+        private static string GetCardSize()
+        {
+            Console.WriteLine("Choose size(1-5) -> XS(1),S(2),M(3),L(4),XL(5): ");
+            int size = Convert.ToInt32(Console.ReadLine());
+            string sizeString;
+            while (true)
+            {
+                switch (size)
+                {
+                    case 1:
+                        sizeString = "XS";
+                        return sizeString;
+                    case 2:
+                        sizeString = "S";
+                        return sizeString;
+                    case 3:
+                        sizeString = "M";
+                        return sizeString;
+                    case 4:
+                        sizeString = "L";
+                        return sizeString;
+                    case 5:
+                        sizeString = "XL";
+                        return sizeString;
+                    default:
+                        sizeString = "Invalid size!";
+                        Console.WriteLine("Pleas enter a valid size from 1 to 5");
+                        break;
+                }
+                continue;
+            }
+        }
+        
 
         private static string RemoveCard(string cardNameToBeDeleted)
         {
@@ -131,6 +143,7 @@ namespace ToDo_Application
             }
             return false;
         }
+        
         #endregion
 
 
@@ -217,7 +230,7 @@ namespace ToDo_Application
 
                     else if (operation_to_be_performed == 2)
                     {
-                        Card newCard = new Card(GetCardDetailsFromUser(TeamMembers));
+                        Card newCard = new Card( new string[] { GetCardName(), GetCardContent(), GetTaskAppointee(TeamMembers), GetCardSize() });
                         Board.ListOfAllCards.Add(newCard);
                         Board.TO_DO_Column.Add(newCard);
                     }
@@ -308,7 +321,6 @@ namespace ToDo_Application
                 }
             }
         }
-
         
     }
 }
